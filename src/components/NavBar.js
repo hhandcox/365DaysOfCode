@@ -1,21 +1,42 @@
-import { useState } from 'react';
+//React Project Tutorial: Build a Responsive Portfolio Website w/ Advanced Animations (2022)
+//12:52
 
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 
 export const NavBar = () => {
     const [activeLink, setActiveLink] = useState('home');
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => {
+            if (window.scrollzY > 50) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        }
+
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, [])
+
+    const onUpdateActiveLink = (value) => {
+        setActiveLink(value);
+    }
+
     return (
-        <Navbar expand="lg">
+        <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
           <Container>
             <Navbar.Brand href="#home">365 Days of Code</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav">\
-                <span className='navbar-toggler-icon'></span>
+                <span className='navbar-toggler-icon'>TOGGLE</span>
             </Navbar.Toggle>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#skills">Skills</Nav.Link>
-                <Nav.Link href="#projects">Projects</Nav.Link>
+                <Nav.Link href="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
+                <Nav.Link href="#skills" className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('skills')}>Skills</Nav.Link>
+                <Nav.Link href="#projects" className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('proj')}>Projects</Nav.Link>
               </Nav>
               <span className='navbar-text'>
                 <div className='social-icon'>
