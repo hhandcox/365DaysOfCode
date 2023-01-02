@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import logo from '../assets/img/logo192.png';
 
 export const NavBar = () => {
     const [activeLink, setActiveLink] = useState('home');
@@ -28,7 +29,7 @@ export const NavBar = () => {
     return (
         <Navbar expand="lg" className={scrolled ? "scrolled" : ""}>
           <Container>
-            <Navbar.Brand href="#home">365 Days of Code</Navbar.Brand>
+            <Navbar.Brand href="#home"><img src={logo} /></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav">\
                 <span className='navbar-toggler-icon'>TOGGLE</span>
             </Navbar.Toggle>
@@ -40,9 +41,9 @@ export const NavBar = () => {
               </Nav>
               <span className='navbar-text'>
                 <div className='social-icon'>
-                    <a href="#"><img src={""} alt="" /></a>
-                    <a href="#"><img src={""} alt="" /></a>
-                    <a href="#"><img src={""} alt="" /></a>
+                    <a href="#"><img src={""} alt="" />Twitter</a>
+                    <a href="#"><img src={""} alt="" />Facebook</a>
+                    <a href="#"><img src={""} alt="" />GitHub</a>
                 </div>
                 <button className='vvd' onClick={() => console.log('connect')}><span>Let's Connect</span></button>
               </span>
